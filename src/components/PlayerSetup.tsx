@@ -62,7 +62,7 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
               onChange={(e) => { setP1(e.target.value); setError(""); }}
               placeholder="Enter name..."
               maxLength={20}
-              className="w-full rounded-2xl border border-border bg-muted/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:glow-primary transition-all"
+              className="w-full rounded-xl border border-border bg-muted/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:glow-primary transition-all"
             />
           </div>
           <div>
@@ -75,7 +75,7 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
               onChange={(e) => { setP2(e.target.value); setError(""); }}
               placeholder="Enter name..."
               maxLength={20}
-              className="w-full rounded-2xl border border-border bg-muted/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent/50 focus:glow-accent transition-all"
+              className="w-full rounded-xl border border-border bg-muted/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent/50 focus:glow-accent transition-all"
             />
           </div>
 
@@ -93,7 +93,7 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
             whileHover={{ scale: 1.03, boxShadow: "0 0 30px hsl(340 85% 55% / 0.5)" }}
             whileTap={{ scale: 0.97 }}
             onClick={handleStart}
-            className="w-full rounded-2xl py-3.5 font-display text-lg font-semibold text-primary-foreground transition-all"
+            className="w-full rounded-xl py-3.5 font-display text-lg font-semibold text-primary-foreground transition-all"
             style={{ background: "linear-gradient(135deg, hsl(340 85% 55%), hsl(350 90% 60%))" }}
           >
             Start the Night 💋
