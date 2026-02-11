@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Gamepad2 } from "lucide-react";
+import { Heart } from "lucide-react";
+import FloatingHearts from "./FloatingHearts";
 
 interface PlayerSetupProps {
   onStart: (p1: string, p2: string) => void;
@@ -15,7 +16,7 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
     const name1 = p1.trim();
     const name2 = p2.trim();
     if (!name1 || !name2) {
-      setError("Both player names are required!");
+      setError("Both names are needed to start the night!");
       return;
     }
     if (name1.length > 20 || name2.length > 20) {
@@ -26,28 +27,31 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-4">
+    <div className="relative flex min-h-screen items-center justify-center p-4">
+      <FloatingHearts />
       <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
+        initial={{ scale: 0.85, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="w-full max-w-md card-gradient rounded-2xl border border-border p-8 glow-primary"
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative z-10 w-full max-w-md glass-card rounded-3xl border border-primary/20 p-8 glow-soft"
       >
         <div className="mb-8 text-center">
           <motion.div
-            animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/20"
+            animate={{ scale: [1, 1.15, 1, 1.1, 1] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-primary/15"
           >
-            <Gamepad2 className="h-8 w-8 text-primary" />
+            <Heart className="h-8 w-8 text-primary fill-primary/40" />
           </motion.div>
-          <h1 className="font-display text-3xl font-bold text-foreground">
-            2 Player Challenge
+          <h1 className="font-display text-3xl font-bold text-foreground italic">
+            Couple Challenge Night
           </h1>
-          <p className="mt-2 text-muted-foreground">Enter your names to begin!</p>
+          <p className="mt-2 text-muted-foreground text-sm">
+            Let the fun begin 😈
+          </p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-5">
           <div>
             <label className="mb-1.5 block text-sm font-medium text-primary">
               Player 1
@@ -58,11 +62,11 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
               onChange={(e) => { setP1(e.target.value); setError(""); }}
               placeholder="Enter name..."
               maxLength={20}
-              className="w-full rounded-xl border border-border bg-muted px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+              className="w-full rounded-2xl border border-border bg-muted/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:glow-primary transition-all"
             />
           </div>
           <div>
-            <label className="mb-1.5 block text-sm font-medium text-secondary">
+            <label className="mb-1.5 block text-sm font-medium text-accent">
               Player 2
             </label>
             <input
@@ -71,7 +75,7 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
               onChange={(e) => { setP2(e.target.value); setError(""); }}
               placeholder="Enter name..."
               maxLength={20}
-              className="w-full rounded-xl border border-border bg-muted px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
+              className="w-full rounded-2xl border border-border bg-muted/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent/50 focus:glow-accent transition-all"
             />
           </div>
 
@@ -86,12 +90,13 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
           )}
 
           <motion.button
-            whileHover={{ scale: 1.03 }}
+            whileHover={{ scale: 1.03, boxShadow: "0 0 30px hsl(340 85% 55% / 0.5)" }}
             whileTap={{ scale: 0.97 }}
             onClick={handleStart}
-            className="w-full rounded-xl bg-primary py-3.5 font-display text-lg font-semibold text-primary-foreground transition-all hover:glow-primary"
+            className="w-full rounded-2xl py-3.5 font-display text-lg font-semibold text-primary-foreground transition-all"
+            style={{ background: "linear-gradient(135deg, hsl(340 85% 55%), hsl(350 90% 60%))" }}
           >
-            Start Game 🎮
+            Start the Night 💋
           </motion.button>
         </div>
       </motion.div>
