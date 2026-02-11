@@ -94,7 +94,7 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
             whileTap={{ scale: 0.97 }}
             onClick={handleStart}
             className="w-full rounded-xl py-3.5 font-display text-lg font-semibold text-primary-foreground transition-all"
-            style={{ background: "linear-gradient(135deg, hsl(340 85% 55%), hsl(350 90% 60%))" }}
+            style={{ background: "linear-gradient(135deg, hsl(0, 100%, 50%), hsl(350 90% 60%))" }}
           >
             Start the Night 💋
           </motion.button>
