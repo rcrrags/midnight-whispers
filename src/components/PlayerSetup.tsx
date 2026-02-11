@@ -44,7 +44,7 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
             <Heart className="h-8 w-8 text-primary fill-primary/40" />
           </motion.div>
           <h1 className="font-display text-3xl font-bold text-foreground italic">
-            Couple Challenge Night
+            The Love Lobby
           </h1>
           <p className="mt-2 text-muted-foreground text-sm">
             Let the fun begin 😈
@@ -96,7 +96,7 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
             className="w-full rounded-xl py-3.5 font-display text-lg font-semibold text-primary-foreground transition-all"
             style={{ background: "linear-gradient(135deg, hsl(0, 100%, 50%), hsl(350 90% 60%))" }}
           >
-            Start the Night 💋
+            🔥 Enter the Night 😍
           </motion.button>
         </div>
       </motion.div>
