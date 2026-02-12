@@ -41,6 +41,11 @@
     --burgundy: 345 70% 18%;
     --plum: 340 40% 8%;
     --cream: 30 30% 88%;
+    
+    --crimson-p1: 347 100% 31%;
+    --crimson-glow: 0 0 20px hsl(347 100% 31% / 0.4), 0 0 45px hsl(347 100% 31% / 0.15);
+    --plum-p2: 285 65% 25%;
+    --plum-glow: 0 0 20px hsl(285 65% 25% / 0.4), 0 0 45px hsl(285 65% 25% / 0.15);
 
     --glow-primary: 0 0 20px hsl(345 70% 35% / 0.4), 0 0 45px hsl(345 70% 35% / 0.15);
     --glow-gold: 0 0 20px hsl(43 56% 52% / 0.35), 0 0 45px hsl(43 56% 52% / 0.12);
@@ -144,6 +149,24 @@
   }
   .text-rose-gold {
     color: hsl(350 30% 60%);
+  }
+  .text-crimson {
+    color: hsl(347 100% 31%);
+  }
+  .text-plum {
+    color: hsl(285 65% 25%);
+  }
+  .glow-crimson {
+    box-shadow: var(--crimson-glow);
+  }
+  .glow-plum {
+    box-shadow: var(--plum-glow);
+  }
+  .border-crimson {
+    border-color: hsl(347 100% 31% / 0.3);
+  }
+  .border-plum {
+    border-color: hsl(285 65% 25% / 0.3);
   }
   .border-gold {
     border-color: hsl(43 56% 52% / 0.3);

@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { playClickSound } from "@/lib/soundEffects";
 
 interface TaskModalProps {
   task: string;
@@ -72,7 +73,10 @@ const TaskModal = ({ task, playerName, blockNumber, onClose }: TaskModalProps) =
           <motion.button
             whileHover={{ scale: 1.03, boxShadow: "0 0 25px hsl(43 56% 52% / 0.3)" }}
             whileTap={{ scale: 0.97 }}
-            onClick={onClose}
+            onClick={() => {
+              playClickSound('modal');
+              onClose();
+            }}
             className="w-full rounded-full py-3 font-display text-lg font-semibold text-foreground tracking-wider transition-all duration-300 border border-accent/30"
             style={{ background: "linear-gradient(135deg, hsl(345 70% 28%), hsl(345 60% 35%))" }}
           >
