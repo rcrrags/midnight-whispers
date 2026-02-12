@@ -4,6 +4,7 @@ import { RotateCcw, Lock, Heart } from "lucide-react";
 import { TASKS } from "@/data/tasks";
 import TaskModal from "./TaskModal";
 import FloatingHearts from "./FloatingHearts";
+import { playClickSound } from "@/lib/soundEffects";
 
 interface GameBoardProps {
   player1: string;
@@ -23,6 +24,7 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
   const handleBlockClick = useCallback(
     (block: number) => {
       if (clickedBlocks.has(block) || modal) return;
+      playClickSound('block');
       const taskIndex = Math.floor(Math.random() * availableTasks.length);
       const task = availableTasks[taskIndex];
       setAvailableTasks((prev) => prev.filter((_, i) => i !== taskIndex));
@@ -64,7 +66,7 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
               transition={{ duration: 0.4 }}
               className={`rounded-2xl px-4 py-2 font-display text-sm font-semibold tracking-wider transition-all duration-300 ${
                 currentPlayer === 1
-                  ? "glass-card border border-accent/40 text-accent glow-gold"
+                  ? "glass-card border-crimson text-crimson glow-crimson"
                   : "bg-muted/30 text-muted-foreground border border-transparent"
               }`}
             >
@@ -77,10 +79,10 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
               transition={{ duration: 0.4 }}
               className={`rounded-2xl px-4 py-2 font-display text-sm font-semibold tracking-wider transition-all duration-300 ${
                 currentPlayer === 2
-                  ? "glass-card border border-rose-gold/40 text-rose-gold"
+                  ? "glass-card border-plum text-plum"
                   : "bg-muted/30 text-muted-foreground border border-transparent"
               }`}
-              style={currentPlayer === 2 ? { boxShadow: "0 0 15px hsl(350 30% 60% / 0.25)" } : {}}
+              style={currentPlayer === 2 && { boxShadow: "var(--plum-glow)" }}
             >
               {player2}
             </motion.span>
@@ -105,7 +107,7 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
         >
           <p className="font-display text-xl italic text-foreground tracking-wide">
             It's{" "}
-            <span className={currentPlayer === 1 ? "text-accent" : "text-rose-gold"}>
+            <span className={currentPlayer === 1 ? "text-crimson" : "text-plum"}>
               {currentName}
             </span>
             's Turn…
@@ -140,8 +142,11 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
                 className={`relative aspect-square rounded-2xl border font-display text-lg font-bold transition-all duration-300 shine-sweep ${
                   isClicked
                     ? "border-border/20 bg-muted/20 text-muted-foreground/15 cursor-not-allowed velvet-pressed opacity-60"
-                    : "border-border/40 velvet-card text-accent hover:velvet-card-hover hover:border-accent/30 cursor-pointer"
+                    : "border-border/40 velvet-card cursor-pointer"
                 }`}
+                style={!isClicked ? {
+                  color: currentPlayer === 1 ? "hsl(347 100% 31%)" : "hsl(285 65% 25%)"
+                } : {}}
               >
                 {isClicked ? (
                   <Lock className="h-4 w-4 mx-auto text-accent/20" />
