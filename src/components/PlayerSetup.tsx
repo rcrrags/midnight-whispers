@@ -33,27 +33,29 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
         initial={{ scale: 0.85, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative z-10 w-full max-w-md glass-card rounded-3xl border border-primary/20 p-8 glow-soft"
+        className="relative z-10 w-full max-w-md glass-card rounded-3xl border border-gold p-8 glow-soft animate-breathe"
       >
         <div className="mb-8 text-center">
           <motion.div
             animate={{ scale: [1, 1.15, 1, 1.1, 1] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-primary/15"
+            className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full"
+            style={{ background: "linear-gradient(135deg, hsl(345 70% 35% / 0.25), hsl(43 56% 52% / 0.15))" }}
           >
-            <Heart className="h-8 w-8 text-primary fill-primary/40" />
+            <Heart className="h-8 w-8 text-accent fill-accent/40" />
           </motion.div>
-          <h1 className="font-display text-3xl font-bold text-foreground italic">
+          <h1 className="font-display text-4xl font-bold text-foreground italic tracking-wide">
             The Love Lobby
           </h1>
-          <p className="mt-2 text-muted-foreground text-sm">
+          <div className="gold-divider mx-auto mt-3 w-24" />
+          <p className="mt-3 text-muted-foreground text-sm tracking-wider">
             Let the fun begin 😈
           </p>
         </div>
 
         <div className="space-y-5">
           <div>
-            <label className="mb-1.5 block text-sm font-medium text-primary">
+            <label className="mb-1.5 block text-sm font-medium text-accent tracking-wider">
               Player 1
             </label>
             <input
@@ -62,11 +64,11 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
               onChange={(e) => { setP1(e.target.value); setError(""); }}
               placeholder="Enter name..."
               maxLength={20}
-              className="w-full rounded-xl border border-border bg-muted/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:glow-primary transition-all"
+              className="w-full rounded-xl border border-border bg-muted/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent/50 focus:glow-gold transition-all duration-300"
             />
           </div>
           <div>
-            <label className="mb-1.5 block text-sm font-medium text-accent">
+            <label className="mb-1.5 block text-sm font-medium text-rose-gold tracking-wider">
               Player 2
             </label>
             <input
@@ -75,7 +77,10 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
               onChange={(e) => { setP2(e.target.value); setError(""); }}
               placeholder="Enter name..."
               maxLength={20}
-              className="w-full rounded-xl border border-border bg-muted/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent/50 focus:glow-accent transition-all"
+              className="w-full rounded-xl border border-border bg-muted/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-rose-gold/50 transition-all duration-300"
+              style={{ boxShadow: "none" }}
+              onFocus={(e) => e.target.style.boxShadow = "0 0 15px hsl(350 30% 60% / 0.25)"}
+              onBlur={(e) => e.target.style.boxShadow = "none"}
             />
           </div>
 
@@ -90,11 +95,11 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
           )}
 
           <motion.button
-            whileHover={{ scale: 1.03, boxShadow: "0 0 30px hsl(340 85% 55% / 0.5)" }}
+            whileHover={{ scale: 1.03, boxShadow: "0 0 30px hsl(43 56% 52% / 0.35)" }}
             whileTap={{ scale: 0.97 }}
             onClick={handleStart}
-            className="w-full rounded-xl py-3.5 font-display text-lg font-semibold text-primary-foreground transition-all"
-            style={{ background: "linear-gradient(135deg, hsl(0, 100%, 50%), hsl(350 90% 60%))" }}
+            className="w-full rounded-xl py-3.5 font-display text-xl font-semibold text-foreground tracking-wider transition-all duration-300 border border-accent/30"
+            style={{ background: "linear-gradient(135deg, hsl(345 70% 30%), hsl(345 60% 38%))" }}
           >
             🔥 Enter the Night 😍
           </motion.button>

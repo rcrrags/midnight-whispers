@@ -62,9 +62,9 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
               key={`p1-${currentPlayer}`}
               animate={currentPlayer === 1 ? { scale: [1, 1.05, 1] } : {}}
               transition={{ duration: 0.4 }}
-              className={`rounded-2xl px-4 py-2 font-display text-sm font-semibold transition-all ${
+              className={`rounded-2xl px-4 py-2 font-display text-sm font-semibold tracking-wider transition-all duration-300 ${
                 currentPlayer === 1
-                  ? "glass-card border border-primary/40 text-primary glow-primary"
+                  ? "glass-card border border-accent/40 text-accent glow-gold"
                   : "bg-muted/30 text-muted-foreground border border-transparent"
               }`}
             >
@@ -75,11 +75,12 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
               key={`p2-${currentPlayer}`}
               animate={currentPlayer === 2 ? { scale: [1, 1.05, 1] } : {}}
               transition={{ duration: 0.4 }}
-              className={`rounded-2xl px-4 py-2 font-display text-sm font-semibold transition-all ${
+              className={`rounded-2xl px-4 py-2 font-display text-sm font-semibold tracking-wider transition-all duration-300 ${
                 currentPlayer === 2
-                  ? "glass-card border border-accent/40 text-accent glow-accent"
+                  ? "glass-card border border-rose-gold/40 text-rose-gold"
                   : "bg-muted/30 text-muted-foreground border border-transparent"
               }`}
+              style={currentPlayer === 2 ? { boxShadow: "0 0 15px hsl(350 30% 60% / 0.25)" } : {}}
             >
               {player2}
             </motion.span>
@@ -88,7 +89,7 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
             whileHover={{ scale: 1.1, rotate: -90 }}
             whileTap={{ scale: 0.9 }}
             onClick={onRestart}
-            className="rounded-xl bg-muted/40 p-2.5 text-muted-foreground hover:text-foreground transition-colors border border-border/50"
+            className="rounded-xl bg-muted/40 p-2.5 text-muted-foreground hover:text-accent transition-all duration-300 border border-border/50"
           >
             <RotateCcw className="h-4 w-4" />
           </motion.button>
@@ -99,11 +100,12 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
           key={currentPlayer}
           initial={{ opacity: 0, x: currentPlayer === 1 ? -15 : 15 }}
           animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.35, ease: "easeInOut" }}
           className="mb-4 text-center"
         >
-          <p className="font-display text-lg italic text-foreground">
+          <p className="font-display text-xl italic text-foreground tracking-wide">
             It's{" "}
-            <span className={currentPlayer === 1 ? "text-primary" : "text-accent"}>
+            <span className={currentPlayer === 1 ? "text-accent" : "text-rose-gold"}>
               {currentName}
             </span>
             's Turn…
@@ -117,7 +119,7 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.4 }}
-            style={{ background: "linear-gradient(90deg, hsl(340 85% 55%), hsl(280 60% 45%))" }}
+            style={{ background: "linear-gradient(90deg, hsl(345 70% 35%), hsl(43 56% 52%))" }}
           />
         </div>
 
@@ -131,18 +133,18 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: num * 0.02, duration: 0.3 }}
-                whileHover={!isClicked ? { scale: 1.1, y: -4 } : {}}
-                whileTap={!isClicked ? { scale: 0.9 } : {}}
+                whileHover={!isClicked ? { scale: 1.05, y: -3 } : {}}
+                whileTap={!isClicked ? { scale: 0.92 } : {}}
                 onClick={() => handleBlockClick(num)}
                 disabled={isClicked}
-                className={`relative aspect-square rounded-2xl border font-display text-lg font-bold transition-all ${
+                className={`relative aspect-square rounded-2xl border font-display text-lg font-bold transition-all duration-300 shine-sweep ${
                   isClicked
-                    ? "border-border/30 bg-muted/20 text-muted-foreground/20 cursor-not-allowed"
-                    : "border-border/50 block-gradient text-foreground hover:block-gradient-hover hover:border-primary/30 hover:glow-soft cursor-pointer"
+                    ? "border-border/20 bg-muted/20 text-muted-foreground/15 cursor-not-allowed velvet-pressed opacity-60"
+                    : "border-border/40 velvet-card text-accent hover:velvet-card-hover hover:border-accent/30 cursor-pointer"
                 }`}
               >
                 {isClicked ? (
-                  <Lock className="h-4 w-4 mx-auto text-muted-foreground/25" />
+                  <Lock className="h-4 w-4 mx-auto text-accent/20" />
                 ) : (
                   num
                 )}
@@ -151,7 +153,7 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
           })}
         </div>
 
-        <p className="mt-4 text-center text-xs text-muted-foreground">
+        <p className="mt-4 text-center text-xs text-muted-foreground tracking-wider">
           {clickedBlocks.size}/30 challenges completed
         </p>
       </div>

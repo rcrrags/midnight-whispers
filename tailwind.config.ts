@@ -64,7 +64,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        display: ['Playfair Display', 'serif'],
+        display: ['Cormorant Garamond', 'serif'],
         body: ['Quicksand', 'sans-serif'],
       },
       keyframes: {
@@ -85,16 +85,16 @@ export default {
           "100%": { transform: "translateY(0)", opacity: "1" },
         },
         "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 15px hsl(340 85% 55% / 0.3)" },
-          "50%": { boxShadow: "0 0 30px hsl(340 85% 55% / 0.6)" },
+          "0%, 100%": { boxShadow: "0 0 15px hsl(345 70% 35% / 0.25)" },
+          "50%": { boxShadow: "0 0 30px hsl(345 70% 35% / 0.5)" },
         },
         "bounce-soft": {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-6px)" },
         },
         "float-heart": {
-          "0%": { transform: "translateY(0) scale(1)", opacity: "0.6" },
-          "50%": { transform: "translateY(-30px) scale(1.1)", opacity: "0.3" },
+          "0%": { transform: "translateY(0) scale(1)", opacity: "0.4" },
+          "50%": { transform: "translateY(-30px) scale(1.1)", opacity: "0.2" },
           "100%": { transform: "translateY(-60px) scale(0.8)", opacity: "0" },
         },
         "heartbeat": {
@@ -104,16 +104,31 @@ export default {
           "45%": { transform: "scale(1.1)" },
           "60%": { transform: "scale(1)" },
         },
+        "breathe": {
+          "0%, 100%": { boxShadow: "0 0 15px hsl(43 56% 52% / 0.15), 0 0 30px hsl(345 70% 35% / 0.1)" },
+          "50%": { boxShadow: "0 0 25px hsl(43 56% 52% / 0.25), 0 0 50px hsl(345 70% 35% / 0.18)" },
+        },
+        "fade-in-text": {
+          "0%": { opacity: "0", transform: "translateY(8px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "shimmer": {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "pop-in": "pop-in 0.3s ease-out",
         "slide-up": "slide-up 0.4s ease-out",
-        "pulse-glow": "pulse-glow 2s infinite",
+        "pulse-glow": "pulse-glow 2.5s ease-in-out infinite",
         "bounce-soft": "bounce-soft 1s infinite",
         "float-heart": "float-heart 4s ease-in-out infinite",
         "heartbeat": "heartbeat 1.5s ease-in-out infinite",
+        "breathe": "breathe 3s ease-in-out infinite",
+        "fade-in-text": "fade-in-text 0.5s ease-out forwards",
+        "shimmer": "shimmer 3s ease-in-out infinite",
       },
     },
   },
