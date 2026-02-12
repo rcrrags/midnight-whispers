@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 
 const FloatingHearts = () => {
-  const hearts = Array.from({ length: 8 }, (_, i) => ({
+  const hearts = Array.from({ length: 40 }, (_, i) => ({
     id: i,
     left: `${10 + Math.random() * 80}%`,
     delay: Math.random() * 5,
