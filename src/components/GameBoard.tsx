@@ -82,7 +82,7 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
                   ? "glass-card border-plum text-plum"
                   : "bg-muted/30 text-muted-foreground border border-transparent"
               }`}
-              style={currentPlayer === 2 && { boxShadow: "var(--plum-glow)" }}
+              style={currentPlayer === 2 ? { boxShadow: "var(--plum-glow)" } : undefined}
             >
               {player2}
             </motion.span>
@@ -145,8 +145,8 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
                     : "border-border/40 velvet-card cursor-pointer"
                 }`}
                 style={!isClicked ? {
-                  color: currentPlayer === 1 ? "hsl(347 100% 31%)" : "hsl(285 65% 25%)"
-                } : {}}
+                  color: currentPlayer === 1 ? "hsl(350 85% 50%)" : "hsl(290 60% 55%)"
+                } : undefined}
               >
                 {isClicked ? (
                   <Lock className="h-4 w-4 mx-auto text-accent/20" />
