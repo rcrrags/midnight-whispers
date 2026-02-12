@@ -27,8 +27,8 @@ const TaskModal = ({ task, playerName, blockNumber, onClose }: TaskModalProps) =
             width: "400px",
             height: "400px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, hsl(345 70% 35% / 0.2), transparent 70%)",
-            filter: "blur(40px)",
+            background: "radial-gradient(circle, hsl(345 70% 35% / 0.2), transparent 50%)",
+            filter: "blur(10px)",
           }}
         />
 
@@ -80,7 +80,7 @@ const TaskModal = ({ task, playerName, blockNumber, onClose }: TaskModalProps) =
             className="w-full rounded-full py-3 font-display text-lg font-semibold text-foreground tracking-wider transition-all duration-300 border border-accent/30"
             style={{ background: "linear-gradient(135deg, hsl(345 70% 28%), hsl(345 60% 35%))" }}
           >
-            That Felt Nice… 😏
+            That Felt Nice… 😏💦
           </motion.button>
         </motion.div>
       </motion.div>
