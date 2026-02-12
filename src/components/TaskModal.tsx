@@ -77,7 +77,7 @@ const TaskModal = ({ task, playerName, blockNumber, onClose }: TaskModalProps) =
               playClickSound('modal');
               onClose();
             }}
-            className="w-full rounded-full py-3 font-display text-lg font-semibold text-foreground tracking-wider transition-all duration-300 border border-accent/30"
+            className="w-full rounded-xl py-3 font-display text-lg font-semibold text-foreground tracking-wider transition-all duration-300 border border-accent/30"
             style={{ background: "linear-gradient(135deg, hsl(345 70% 28%), hsl(345 60% 35%))" }}
           >
             That Felt Nice… 😏💦
