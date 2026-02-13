@@ -4,6 +4,7 @@ import GameBoard from "@/components/GameBoard";
 import GameOver from "@/components/GameOver";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AboutContact from "@/components/AboutContact";
 
 type Screen = "setup" | "game" | "over";
 
@@ -41,6 +42,7 @@ const Index = () => {
         ) : (
           <PlayerSetup onStart={handleStart} />
         )}
+        <AboutContact />
       </main>
       <Footer />
     </div>
