@@ -13,7 +13,7 @@ export const TASKS: string[] = [
   "Ass Plug Finger: Lube finger, circle & press asshole gently—no entry—10 circles.",
   "Underwear Swap: Both strip to underwear. Exchange yours—put on theirs, wear for next 5 tasks. Tease with a hip shake.",
   "Double Pen: Two fingers in pussy/ass, scissor gently.",
-  "Test 15",
+  "Bondage Light: Tie wrists with scarf/belt, tease body 1 min.",
   "Test 16",
   "Test 17",
   "Test 18",
