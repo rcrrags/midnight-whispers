@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
-const navLinks = ["Home", "About", "Services", "Contact"];
+const navLinks = ["About", "Contact"];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -11,9 +11,8 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
         {/* Logo */}
         <a href="/" className="flex items-center gap-2 group">
-          <img src="/rs.png" alt="RS" className="h-10 w-10 rounded-full border border-accent/40 shadow-md group-hover:shadow-accent/30 transition-shadow duration-300" />
           <span className="font-display text-2xl font-bold tracking-wider text-accent drop-shadow-[0_0_8px_hsl(43_56%_52%/0.4)] group-hover:drop-shadow-[0_0_14px_hsl(43_56%_52%/0.6)] transition-all duration-300">
-            RS
+            ❤️ HeartPlay
           </span>
         </a>
 

@@ -1,12 +1,9 @@
 const Footer = () => (
   <footer className="w-full border-t border-border/30 glass-card mt-auto">
-    <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-center gap-2 text-center">
-      <span className="font-display text-sm tracking-wide text-foreground/50">
+    <div className="max-w-7xl mx-auto px-6 py-2 flex items-center justify-center">
+      <span className="text-xs tracking-wide text-foreground/40" style={{ fontFamily: "'Inter', sans-serif" }}>
         Made by{" "}
-        <span className="text-accent font-semibold drop-shadow-[0_0_6px_hsl(43_56%_52%/0.35)]">
-          RS
-        </span>{" "}
-        © 2026 | All Rights Reserved
+        <span className="text-accent font-medium">RS</span> © 2026 | All Rights Reserved
       </span>
     </div>
   </footer>
