@@ -126,7 +126,7 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
         </div>
 
         {/* Grid - 5x6 */}
-        <div className="grid grid-cols-8 gap-2 sm:gap-3">
+        <div className="grid grid-cols-5 gap-2 sm:gap-3">
           {Array.from({ length: 30 }, (_, i) => i + 1).map((num) => {
             const isClicked = clickedBlocks.has(num);
             return (
