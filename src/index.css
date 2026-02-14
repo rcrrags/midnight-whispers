@@ -110,10 +110,10 @@
     --plum: 220 30% 30%;
     --cream: 215 20% 30%;
 
-    --crimson-p1: 350 70% 52%;
-    --crimson-glow: 0 0 12px hsl(350 70% 52% / 0.25), 0 0 28px hsl(350 70% 52% / 0.08);
-    --plum-p2: 260 50% 52%;
-    --plum-glow: 0 0 12px hsl(260 50% 52% / 0.25), 0 0 28px hsl(260 50% 52% / 0.08);
+    --crimson-p1: 350 80% 45%;
+    --crimson-glow: 0 0 14px hsl(350 80% 45% / 0.35), 0 0 30px hsl(350 80% 45% / 0.12);
+    --plum-p2: 275 60% 42%;
+    --plum-glow: 0 0 14px hsl(275 60% 42% / 0.35), 0 0 30px hsl(275 60% 42% / 0.12);
 
     --glow-primary: 0 0 12px hsl(215 70% 50% / 0.18), 0 0 28px hsl(215 70% 50% / 0.06);
     --glow-gold: 0 0 12px hsl(215 65% 55% / 0.18), 0 0 28px hsl(215 65% 55% / 0.06);
@@ -217,10 +217,10 @@
     color: hsl(350 30% 60%);
   }
   .text-crimson {
-    color: hsl(350 85% 50%);
+    color: hsl(var(--crimson-p1));
   }
   .text-plum {
-    color: hsl(290 60% 55%);
+    color: hsl(var(--plum-p2));
   }
   .glow-crimson {
     box-shadow: var(--crimson-glow);
