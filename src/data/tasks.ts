@@ -30,9 +30,9 @@ export const TASKS: string[] = [
   "Turn off the lights and cuddle under one blanket without speaking for 1 minute.",
   "Lay down and let them pull you close like they don’t want to let go.",
   "Give ur patner a lip lock for 2 minutes",
-  "Test 32",
-  "Test 33",
-  "Test 34",
-  "Test 35",
+  "Heartbeat Sync – Sit on their lap and try to match your breathing with theirs.",
+  "Heartbeat Challenge – Hug each other quietly for one minute and just feel each other’s heartbeat",
+  "Massage Minute – Give your partner a 2-minute shoulder massage",
+  "Five Kisses Rule – Give five different types of kisses (forehead, hand, cheek, etc.).",
 
 ];
