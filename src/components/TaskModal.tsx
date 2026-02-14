@@ -17,11 +17,12 @@ const TaskModal = ({ task, playerName, blockNumber, onClose }: TaskModalProps) =
         exit={{ opacity: 0 }}
         transition={{ duration: 0.35, ease: "easeInOut" }}
         className="fixed inset-0 z-50 flex items-center justify-center p-4"
-        // style={{ background: "hsl(230 25% 6% / 0.92)", backdropFilter: "blur(18px)" }} 
         style={{
-          background: "transparent",
-          backdropFilter: "none"
+          background: "hsl(230 25% 6% / 0.35)",
+          backdropFilter: "blur(18px)"
         }}
+
+        // style={{ background: "hsl(230 25% 6% / 0.92)", backdropFilter: "blur(18px)" }} 
         onClick={onClose}
       >
         {/* Ambient diagonal glow */}
