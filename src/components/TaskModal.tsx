@@ -19,7 +19,7 @@ const TaskModal = ({ task, playerName, blockNumber, onClose }: TaskModalProps) =
         className="fixed inset-0 z-50 flex items-center justify-center p-4"
         style={{
           background: "hsl(230 25% 6% / 0.20)",
-          backdropFilter: "blur(18px)"
+          backdropFilter: "blur(10px)"
         }}
 
         // style={{ background: "hsl(230 25% 6% / 0.92)", backdropFilter: "blur(18px)" }} 
