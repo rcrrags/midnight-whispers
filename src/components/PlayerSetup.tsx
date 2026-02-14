@@ -12,15 +12,23 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
   const [p2, setP2] = useState("");
   const [error, setError] = useState("");
 
+  const sanitizeName = (name: string) => {
+    return name.replace(/[<>"'&\\/]/g, '').trim();
+  };
+
   const handleStart = () => {
-    const name1 = p1.trim();
-    const name2 = p2.trim();
+    const name1 = sanitizeName(p1);
+    const name2 = sanitizeName(p2);
     if (!name1 || !name2) {
       setError("Both names are needed to start the night!");
       return;
     }
     if (name1.length > 20 || name2.length > 20) {
       setError("Names must be 20 characters or less.");
+      return;
+    }
+    if (!/^[a-zA-Z0-9\s._-]+$/.test(name1) || !/^[a-zA-Z0-9\s._-]+$/.test(name2)) {
+      setError("Names can only contain letters, numbers, spaces, dots, hyphens and underscores.");
       return;
     }
     onStart(name1, name2);
