@@ -18,7 +18,7 @@ const TaskModal = ({ task, playerName, blockNumber, onClose }: TaskModalProps) =
         transition={{ duration: 0.35, ease: "easeInOut" }}
         className="fixed inset-0 z-50 flex items-center justify-center p-4"
         style={{
-          background: "hsl(230 25% 6% / 0.35)",
+          background: "hsl(230 25% 6% / 0.20)",
           backdropFilter: "blur(18px)"
         }}
 
