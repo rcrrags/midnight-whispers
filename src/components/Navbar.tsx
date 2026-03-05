@@ -1,70 +1,93 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
+  { label: "Home", path: "/" },
   { label: "About", path: "/about" },
   { label: "Contact", path: "/contact" },
 ];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass-card border-b border-border/40">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/30 bg-background/80 backdrop-blur-xl">
+      <div className="max-w-5xl mx-auto flex items-center justify-between px-5 h-14">
         <Link to="/" className="flex items-center gap-2 group">
-          <span className="font-display text-2xl font-bold tracking-wider text-accent drop-shadow-[0_0_8px_hsl(43_56%_52%/0.4)] group-hover:drop-shadow-[0_0_14px_hsl(43_56%_52%/0.6)] transition-all duration-300">
+          <span className="text-xl font-bold tracking-tight font-display text-foreground group-hover:text-accent transition-colors duration-300">
             ❤️ HeartPlay
           </span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
-          <ul className="flex items-center gap-8">
-            {navLinks.map((link) => (
-              <li key={link.label}>
-                <Link
-                  to={link.path}
-                  className="font-body text-sm tracking-widest uppercase text-foreground/70 hover:text-accent transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <ThemeToggle />
+        <div className="hidden md:flex items-center gap-1">
+          {navLinks.map((link) => {
+            const isActive = location.pathname === link.path;
+            return (
+              <Link
+                key={link.label}
+                to={link.path}
+                className={`relative px-4 py-2 rounded-lg font-body text-sm font-medium transition-all duration-200 ${
+                  isActive
+                    ? "text-accent bg-accent/10"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+          <div className="ml-2 pl-2 border-l border-border/40">
+            <ThemeToggle />
+          </div>
         </div>
 
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
           <button
             onClick={() => setOpen(!open)}
-            className="text-foreground/70 hover:text-accent transition-colors"
+            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all"
             aria-label="Toggle menu"
           >
-            {open ? <X size={24} /> : <Menu size={24} />}
+            {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
 
-      {open && (
-        <div className="md:hidden glass-card border-t border-border/30 animate-slide-up">
-          <ul className="flex flex-col items-center gap-4 py-6">
-            {navLinks.map((link) => (
-              <li key={link.label}>
-                <Link
-                  to={link.path}
-                  onClick={() => setOpen(false)}
-                  className="font-body text-sm tracking-widest uppercase text-foreground/70 hover:text-accent transition-colors duration-300"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden overflow-hidden border-t border-border/20 bg-background/95 backdrop-blur-xl"
+          >
+            <div className="flex flex-col p-3 gap-1">
+              {navLinks.map((link) => {
+                const isActive = location.pathname === link.path;
+                return (
+                  <Link
+                    key={link.label}
+                    to={link.path}
+                    onClick={() => setOpen(false)}
+                    className={`px-4 py-2.5 rounded-lg font-body text-sm font-medium transition-all ${
+                      isActive
+                        ? "text-accent bg-accent/10"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

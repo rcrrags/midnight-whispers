@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
+import { Heart, ArrowRight } from "lucide-react";
 import FloatingHearts from "./FloatingHearts";
 
 interface PlayerSetupProps {
@@ -35,82 +35,79 @@ const PlayerSetup = ({ onStart }: PlayerSetupProps) => {
   };
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center p-4">
+    <div className="relative flex min-h-[calc(100vh-3.5rem)] items-center justify-center p-4">
       <FloatingHearts />
       <motion.div
-        initial={{ scale: 0.85, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative z-10 w-full max-w-md glass-card rounded-3xl border border-gold p-8 glow-soft animate-breathe"
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="relative z-10 w-full max-w-sm"
       >
-        <div className="mb-8 text-center">
-          <motion.div
-            animate={{ scale: [1, 1.15, 1, 1.1, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full"
-            style={{ background: "linear-gradient(135deg, hsl(345 70% 35% / 0.25), hsl(43 56% 52% / 0.15))" }}
-          >
-            <Heart className="h-8 w-8 text-accent fill-accent/40" />
-          </motion.div>
-          <h1 className="font-display text-4xl font-bold text-foreground italic tracking-wide">
-            The Love Lobby
-          </h1>
-          <div className="gold-divider mx-auto mt-3 w-24" />
-          <p className="mt-3 text-muted-foreground text-sm tracking-wider">
-            Let the fun begin 😈
-          </p>
-        </div>
-
-        <div className="space-y-5">
-          <div>
-            <label className="mb-1.5 block text-sm font-medium text-accent tracking-wider">
-              Player 1
-            </label>
-            <input
-              type="text"
-              value={p1}
-              onChange={(e) => { setP1(e.target.value); setError(""); }}
-              placeholder="Enter name..."
-              maxLength={20}
-              className="w-full rounded-xl border border-border bg-muted/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent/50 focus:glow-gold transition-all duration-300"
-            />
-          </div>
-          <div>
-            <label className="mb-1.5 block text-sm font-medium text-rose-gold tracking-wider">
-              Player 2
-            </label>
-            <input
-              type="text"
-              value={p2}
-              onChange={(e) => { setP2(e.target.value); setError(""); }}
-              placeholder="Enter name..."
-              maxLength={20}
-              className="w-full rounded-xl border border-border bg-muted/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-rose-gold/50 transition-all duration-300"
-              style={{ boxShadow: "none" }}
-              onFocus={(e) => e.target.style.boxShadow = "0 0 15px hsl(350 30% 60% / 0.25)"}
-              onBlur={(e) => e.target.style.boxShadow = "none"}
-            />
-          </div>
-
-          {error && (
-            <motion.p
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center text-sm text-destructive"
+        <div className="rounded-2xl border border-border/40 bg-card/80 backdrop-blur-md p-8 shadow-lg">
+          <div className="mb-8 text-center">
+            <motion.div
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10"
             >
-              {error}
-            </motion.p>
-          )}
+              <Heart className="h-7 w-7 text-primary fill-primary/30" />
+            </motion.div>
+            <h1 className="font-display text-3xl font-bold text-foreground tracking-tight">
+              The Love Lobby
+            </h1>
+            <p className="mt-2 text-muted-foreground text-sm">
+              Enter your names to begin 😈
+            </p>
+          </div>
 
-          <motion.button
-            whileHover={{ scale: 1.03, boxShadow: "0 0 30px hsl(43 56% 52% / 0.35)" }}
-            whileTap={{ scale: 0.97 }}
-            onClick={handleStart}
-            className="w-full rounded-xl py-3.5 font-display text-xl font-semibold text-foreground tracking-wider transition-all duration-300 border border-accent/30"
-            style={{ background: "linear-gradient(135deg, hsl(345 70% 30%), hsl(345 60% 38%))" }}
-          >
-            🔥 Enter the Night 😍
-          </motion.button>
+          <div className="space-y-4">
+            <div>
+              <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Player 1
+              </label>
+              <input
+                type="text"
+                value={p1}
+                onChange={(e) => { setP1(e.target.value); setError(""); }}
+                placeholder="Enter name..."
+                maxLength={20}
+                className="w-full rounded-xl border border-border bg-input/50 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all duration-200"
+              />
+            </div>
+            <div>
+              <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Player 2
+              </label>
+              <input
+                type="text"
+                value={p2}
+                onChange={(e) => { setP2(e.target.value); setError(""); }}
+                placeholder="Enter name..."
+                maxLength={20}
+                className="w-full rounded-xl border border-border bg-input/50 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-secondary/30 focus:border-secondary/50 transition-all duration-200"
+              />
+            </div>
+
+            {error && (
+              <motion.p
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-center text-xs text-destructive font-medium"
+              >
+                {error}
+              </motion.p>
+            )}
+
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={handleStart}
+              className="w-full flex items-center justify-center gap-2 rounded-xl bg-primary py-3.5 font-body text-sm font-semibold text-primary-foreground tracking-wide hover:opacity-90 transition-all duration-200 shadow-md"
+            >
+              Enter the Night
+              <ArrowRight className="w-4 h-4" />
+            </motion.button>
+          </div>
         </div>
       </motion.div>
     </div>

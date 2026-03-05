@@ -50,83 +50,74 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
   const progress = (clickedBlocks.size / 30) * 100;
 
   return (
-    <div className="relative min-h-screen p-4 pb-8">
+    <div className="relative min-h-[calc(100vh-3.5rem)] p-4 pb-8">
       <FloatingHearts />
-      <div className="relative z-10 mx-auto max-w-2xl">
+      <div className="relative z-10 mx-auto max-w-lg">
         {/* Header */}
         <motion.div
-          initial={{ y: -20, opacity: 0 }}
+          initial={{ y: -10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           className="mb-4 flex items-center justify-between"
         >
-          <div className="flex items-center gap-3">
-            <motion.span
-              key={`p1-${currentPlayer}`}
-              animate={currentPlayer === 1 ? { scale: [1, 1.05, 1] } : {}}
-              transition={{ duration: 0.4 }}
-              className={`rounded-2xl px-4 py-2 font-display text-sm font-semibold tracking-wider transition-all duration-300 ${
+          <div className="flex items-center gap-2">
+            <span
+              className={`rounded-lg px-3 py-1.5 text-xs font-semibold font-body tracking-wide transition-all duration-200 ${
                 currentPlayer === 1
-                  ? "glass-card border-crimson text-crimson glow-crimson"
-                  : "bg-muted/30 text-muted-foreground border border-transparent"
+                  ? "bg-primary/15 text-crimson border border-primary/30"
+                  : "bg-muted/30 text-muted-foreground"
               }`}
             >
               {player1}
-            </motion.span>
-            <Heart className="h-4 w-4 text-primary/50 fill-primary/30" />
-            <motion.span
-              key={`p2-${currentPlayer}`}
-              animate={currentPlayer === 2 ? { scale: [1, 1.05, 1] } : {}}
-              transition={{ duration: 0.4 }}
-              className={`rounded-2xl px-4 py-2 font-display text-sm font-semibold tracking-wider transition-all duration-300 ${
+            </span>
+            <Heart className="h-3.5 w-3.5 text-muted-foreground/40 fill-muted-foreground/20" />
+            <span
+              className={`rounded-lg px-3 py-1.5 text-xs font-semibold font-body tracking-wide transition-all duration-200 ${
                 currentPlayer === 2
-                  ? "glass-card border-plum text-plum"
-                  : "bg-muted/30 text-muted-foreground border border-transparent"
+                  ? "bg-secondary/15 text-plum border border-secondary/30"
+                  : "bg-muted/30 text-muted-foreground"
               }`}
-              style={currentPlayer === 2 ? { boxShadow: "var(--plum-glow)" } : undefined}
             >
               {player2}
-            </motion.span>
+            </span>
           </div>
-          <motion.button
-            whileHover={{ scale: 1.1, rotate: -90 }}
-            whileTap={{ scale: 0.9 }}
+          <button
             onClick={onRestart}
-            className="rounded-xl bg-muted/40 p-2.5 text-muted-foreground hover:text-accent transition-all duration-300 border border-border/50"
+            className="rounded-lg p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
           >
             <RotateCcw className="h-4 w-4" />
-          </motion.button>
+          </button>
         </motion.div>
 
         {/* Turn indicator */}
-        <motion.div
+        <motion.p
           key={currentPlayer}
-          initial={{ opacity: 0, x: currentPlayer === 1 ? -15 : 15 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.35, ease: "easeInOut" }}
-          className="mb-4 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="mb-3 text-center text-sm text-muted-foreground"
         >
-          <p className="font-display text-xl italic text-foreground tracking-wide">
-            It's{" "}
-            <span className={currentPlayer === 1 ? "text-crimson" : "text-plum"}>
-              {currentName}
-            </span>
-            's Turn…
-          </p>
-        </motion.div>
+          <span className={currentPlayer === 1 ? "text-crimson font-semibold" : "text-plum font-semibold"}>
+            {currentName}
+          </span>
+          's turn
+        </motion.p>
 
-        {/* Progress bar */}
-        <div className="mb-5 h-1.5 w-full overflow-hidden rounded-full bg-muted/50">
-          <motion.div
-            className="h-full rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.4 }}
-            style={{ background: "linear-gradient(90deg, hsl(345 70% 35%), hsl(43 56% 52%))" }}
-          />
+        {/* Progress */}
+        <div className="mb-4 flex items-center gap-3">
+          <div className="flex-1 h-1.5 rounded-full bg-muted/50 overflow-hidden">
+            <motion.div
+              className="h-full rounded-full bg-primary"
+              initial={{ width: 0 }}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.3 }}
+            />
+          </div>
+          <span className="text-xs text-muted-foreground font-body tabular-nums">
+            {clickedBlocks.size}/30
+          </span>
         </div>
 
-        {/* Grid - 5x6 */}
-        <div className="grid grid-cols-5 gap-2 sm:gap-3">
+        {/* Grid */}
+        <div className="grid grid-cols-5 gap-2">
           {Array.from({ length: 30 }, (_, i) => i + 1).map((num) => {
             const isClicked = clickedBlocks.has(num);
             return (
@@ -134,22 +125,22 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
                 key={num}
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: num * 0.02, duration: 0.3 }}
-                whileHover={!isClicked ? { scale: 1.05, y: -3 } : {}}
-                whileTap={!isClicked ? { scale: 0.92 } : {}}
+                transition={{ delay: num * 0.015, duration: 0.25 }}
+                whileHover={!isClicked ? { scale: 1.06, y: -2 } : {}}
+                whileTap={!isClicked ? { scale: 0.94 } : {}}
                 onClick={() => handleBlockClick(num)}
                 disabled={isClicked}
-                className={`relative aspect-square rounded-2xl border font-display text-lg font-bold transition-all duration-300 shine-sweep ${
+                className={`aspect-square rounded-xl font-body text-sm font-bold transition-all duration-200 ${
                   isClicked
-                    ? "border-border/20 bg-muted/20 text-muted-foreground/15 cursor-not-allowed velvet-pressed opacity-60"
-                    : "border-border/40 velvet-card cursor-pointer"
+                    ? "bg-muted/20 text-muted-foreground/20 cursor-not-allowed border border-border/10"
+                    : "bg-card border border-border/40 hover:border-primary/40 hover:shadow-md cursor-pointer"
                 }`}
                 style={!isClicked ? {
-                  color: currentPlayer === 1 ? "hsl(350 85% 50%)" : "hsl(290 60% 55%)"
+                  color: currentPlayer === 1 ? "hsl(var(--crimson-p1))" : "hsl(var(--plum-p2))"
                 } : undefined}
               >
                 {isClicked ? (
-                  <Lock className="h-4 w-4 mx-auto text-accent/20" />
+                  <Lock className="h-3.5 w-3.5 mx-auto text-muted-foreground/20" />
                 ) : (
                   num
                 )}
@@ -157,10 +148,6 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
             );
           })}
         </div>
-
-        <p className="mt-4 text-center text-xs text-muted-foreground tracking-wider">
-          {clickedBlocks.size}/30 challenges completed
-        </p>
       </div>
 
       {modal && (
