@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
-import { RotateCcw, Lock, Heart } from "lucide-react";
+import { RotateCcw, Lock, Heart, Sparkles } from "lucide-react";
 import { TASKS } from "@/data/tasks";
 import TaskModal from "./TaskModal";
 import FloatingHearts from "./FloatingHearts";
@@ -53,94 +53,128 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
     <div className="relative min-h-[calc(100vh-3.5rem)] p-4 pb-8">
       <FloatingHearts />
       <div className="relative z-10 mx-auto max-w-lg">
-        {/* Header */}
+        {/* Player badges */}
         <motion.div
-          initial={{ y: -10, opacity: 0 }}
+          initial={{ y: -15, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="mb-4 flex items-center justify-between"
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-5 rounded-2xl border border-border/20 backdrop-blur-xl p-3"
+          style={{ background: "var(--gradient-glass)" }}
         >
-          <div className="flex items-center gap-2">
-            <span
-              className={`rounded-lg px-3 py-1.5 text-xs font-semibold font-body tracking-wide transition-all duration-200 ${
-                currentPlayer === 1
-                  ? "bg-primary/15 text-crimson border border-primary/30"
-                  : "bg-muted/30 text-muted-foreground"
-              }`}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              {[
+                { name: player1, num: 1 as const, color: "--crimson-p1" },
+                { name: player2, num: 2 as const, color: "--plum-p2" },
+              ].map(({ name, num, color }) => (
+                <motion.span
+                  key={num}
+                  animate={currentPlayer === num ? { scale: [1, 1.03, 1] } : {}}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="rounded-xl px-4 py-2 text-xs font-bold font-body tracking-wider uppercase transition-all duration-300"
+                  style={
+                    currentPlayer === num
+                      ? {
+                          background: `hsl(var(${color}) / 0.15)`,
+                          color: `hsl(var(${color}))`,
+                          border: `1px solid hsl(var(${color}) / 0.3)`,
+                          boxShadow: `0 0 15px hsl(var(${color}) / 0.15)`,
+                        }
+                      : {
+                          background: "hsl(var(--muted) / 0.3)",
+                          color: "hsl(var(--muted-foreground))",
+                          border: "1px solid transparent",
+                        }
+                  }
+                >
+                  {name}
+                </motion.span>
+              ))}
+              <Heart className="h-3 w-3 text-muted-foreground/30 fill-muted-foreground/15 mx-1" />
+            </div>
+            <motion.button
+              whileHover={{ scale: 1.1, rotate: -90 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={onRestart}
+              className="rounded-xl p-2.5 text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-all duration-200"
             >
-              {player1}
-            </span>
-            <Heart className="h-3.5 w-3.5 text-muted-foreground/40 fill-muted-foreground/20" />
-            <span
-              className={`rounded-lg px-3 py-1.5 text-xs font-semibold font-body tracking-wide transition-all duration-200 ${
-                currentPlayer === 2
-                  ? "bg-secondary/15 text-plum border border-secondary/30"
-                  : "bg-muted/30 text-muted-foreground"
-              }`}
-            >
-              {player2}
-            </span>
+              <RotateCcw className="h-4 w-4" />
+            </motion.button>
           </div>
-          <button
-            onClick={onRestart}
-            className="rounded-lg p-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all duration-200"
-          >
-            <RotateCcw className="h-4 w-4" />
-          </button>
         </motion.div>
 
         {/* Turn indicator */}
-        <motion.p
+        <motion.div
           key={currentPlayer}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="mb-3 text-center text-sm text-muted-foreground"
+          initial={{ opacity: 0, y: -5 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-4 flex items-center justify-center gap-2"
         >
-          <span className={currentPlayer === 1 ? "text-crimson font-semibold" : "text-plum font-semibold"}>
-            {currentName}
-          </span>
-          's turn
-        </motion.p>
+          <Sparkles className="w-3 h-3 text-muted-foreground/40" />
+          <p className="text-center text-sm text-muted-foreground font-body">
+            <span
+              className="font-bold"
+              style={{ color: currentPlayer === 1 ? "hsl(var(--crimson-p1))" : "hsl(var(--plum-p2))" }}
+            >
+              {currentName}
+            </span>
+            <span className="opacity-70">'s turn to pick</span>
+          </p>
+          <Sparkles className="w-3 h-3 text-muted-foreground/40" />
+        </motion.div>
 
-        {/* Progress */}
-        <div className="mb-4 flex items-center gap-3">
-          <div className="flex-1 h-1.5 rounded-full bg-muted/50 overflow-hidden">
+        {/* Progress bar */}
+        <div className="mb-5 flex items-center gap-3">
+          <div className="flex-1 h-2 rounded-full bg-muted/30 overflow-hidden border border-border/10">
             <motion.div
-              className="h-full rounded-full bg-primary"
+              className="h-full rounded-full"
+              style={{ background: "var(--gradient-primary)" }}
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
             />
           </div>
-          <span className="text-xs text-muted-foreground font-body tabular-nums">
+          <span className="text-xs text-muted-foreground font-body font-bold tabular-nums bg-muted/20 px-2 py-1 rounded-lg">
             {clickedBlocks.size}/30
           </span>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-5 gap-2">
+        <div className="grid grid-cols-5 gap-2.5">
           {Array.from({ length: 30 }, (_, i) => i + 1).map((num) => {
             const isClicked = clickedBlocks.has(num);
+            const playerColor = currentPlayer === 1 ? "--crimson-p1" : "--plum-p2";
             return (
               <motion.button
                 key={num}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: num * 0.015, duration: 0.25 }}
-                whileHover={!isClicked ? { scale: 1.06, y: -2 } : {}}
-                whileTap={!isClicked ? { scale: 0.94 } : {}}
+                initial={{ scale: 0, opacity: 0, rotateY: 90 }}
+                animate={{ scale: 1, opacity: 1, rotateY: 0 }}
+                transition={{ delay: num * 0.02, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={!isClicked ? { scale: 1.08, y: -3 } : {}}
+                whileTap={!isClicked ? { scale: 0.92 } : {}}
                 onClick={() => handleBlockClick(num)}
                 disabled={isClicked}
-                className={`aspect-square rounded-xl font-body text-sm font-bold transition-all duration-200 ${
+                className={`aspect-square rounded-xl font-body text-sm font-bold transition-all duration-300 ${
                   isClicked
-                    ? "bg-muted/20 text-muted-foreground/20 cursor-not-allowed border border-border/10"
-                    : "bg-card border border-border/40 hover:border-primary/40 hover:shadow-md cursor-pointer"
+                    ? "cursor-not-allowed opacity-30"
+                    : "cursor-pointer hover:shadow-lg"
                 }`}
-                style={!isClicked ? {
-                  color: currentPlayer === 1 ? "hsl(var(--crimson-p1))" : "hsl(var(--plum-p2))"
-                } : undefined}
+                style={
+                  isClicked
+                    ? {
+                        background: "hsl(var(--muted) / 0.15)",
+                        border: "1px solid hsl(var(--border) / 0.08)",
+                      }
+                    : {
+                        background: "var(--gradient-block)",
+                        border: "1px solid hsl(var(--border) / 0.3)",
+                        color: `hsl(var(${playerColor}))`,
+                        boxShadow: "0 2px 8px hsl(var(--background) / 0.3)",
+                      }
+                }
               >
                 {isClicked ? (
-                  <Lock className="h-3.5 w-3.5 mx-auto text-muted-foreground/20" />
+                  <Lock className="h-3.5 w-3.5 mx-auto text-muted-foreground/25" />
                 ) : (
                   num
                 )}
