@@ -53,13 +53,16 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
     <div className="relative min-h-[calc(100vh-3.5rem)] p-4 pb-8">
       <FloatingHearts />
       <div className="relative z-10 mx-auto max-w-lg">
-        {/* Player badges */}
+        {/* Header card */}
         <motion.div
-          initial={{ y: -15, opacity: 0 }}
+          initial={{ y: -12, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-5 rounded-2xl border border-border/20 backdrop-blur-xl p-3"
-          style={{ background: "var(--gradient-glass)" }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-4 rounded-2xl border border-border/20 backdrop-blur-xl p-3"
+          style={{
+            background: "var(--gradient-card)",
+            boxShadow: "0 4px 20px hsl(var(--background) / 0.3), var(--glow-soft)",
+          }}
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -69,34 +72,34 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
               ].map(({ name, num, color }) => (
                 <motion.span
                   key={num}
-                  animate={currentPlayer === num ? { scale: [1, 1.03, 1] } : {}}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="rounded-xl px-4 py-2 text-xs font-bold font-body tracking-wider uppercase transition-all duration-300"
+                  animate={currentPlayer === num ? { scale: [1, 1.02, 1] } : {}}
+                  transition={{ duration: 2.5, repeat: Infinity }}
+                  className="rounded-xl px-3.5 py-2 text-xs font-bold font-body tracking-wider uppercase transition-all duration-300"
                   style={
                     currentPlayer === num
                       ? {
-                          background: `hsl(var(${color}) / 0.15)`,
+                          background: `hsl(var(${color}) / 0.12)`,
                           color: `hsl(var(${color}))`,
-                          border: `1px solid hsl(var(${color}) / 0.3)`,
-                          boxShadow: `0 0 15px hsl(var(${color}) / 0.15)`,
+                          border: `1px solid hsl(var(${color}) / 0.25)`,
+                          boxShadow: `0 2px 10px hsl(var(${color}) / 0.1)`,
                         }
                       : {
                           background: "hsl(var(--muted) / 0.3)",
                           color: "hsl(var(--muted-foreground))",
-                          border: "1px solid transparent",
+                          border: "1px solid hsl(var(--border) / 0.3)",
                         }
                   }
                 >
                   {name}
                 </motion.span>
               ))}
-              <Heart className="h-3 w-3 text-muted-foreground/30 fill-muted-foreground/15 mx-1" />
+              <Heart className="h-3 w-3 text-muted-foreground/25 fill-muted-foreground/10 mx-0.5" />
             </div>
             <motion.button
-              whileHover={{ scale: 1.1, rotate: -90 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.08, rotate: -90 }}
+              whileTap={{ scale: 0.92 }}
               onClick={onRestart}
-              className="rounded-xl p-2.5 text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-all duration-200"
+              className="rounded-xl p-2.5 text-muted-foreground hover:text-foreground hover:bg-muted/25 transition-all duration-200"
             >
               <RotateCcw className="h-4 w-4" />
             </motion.button>
@@ -106,11 +109,11 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
         {/* Turn indicator */}
         <motion.div
           key={currentPlayer}
-          initial={{ opacity: 0, y: -5 }}
+          initial={{ opacity: 0, y: -4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-4 flex items-center justify-center gap-2"
+          className="mb-3 flex items-center justify-center gap-2"
         >
-          <Sparkles className="w-3 h-3 text-muted-foreground/40" />
+          <Sparkles className="w-3 h-3 text-muted-foreground/30" />
           <p className="text-center text-sm text-muted-foreground font-body">
             <span
               className="font-bold"
@@ -118,14 +121,14 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
             >
               {currentName}
             </span>
-            <span className="opacity-70">'s turn to pick</span>
+            <span className="opacity-60">'s turn to pick</span>
           </p>
-          <Sparkles className="w-3 h-3 text-muted-foreground/40" />
+          <Sparkles className="w-3 h-3 text-muted-foreground/30" />
         </motion.div>
 
-        {/* Progress bar */}
-        <div className="mb-5 flex items-center gap-3">
-          <div className="flex-1 h-2 rounded-full bg-muted/30 overflow-hidden border border-border/10">
+        {/* Progress */}
+        <div className="mb-4 flex items-center gap-3">
+          <div className="flex-1 h-1.5 rounded-full bg-muted/25 overflow-hidden">
             <motion.div
               className="h-full rounded-full"
               style={{ background: "var(--gradient-primary)" }}
@@ -134,47 +137,47 @@ const GameBoard = ({ player1, player2, onGameOver, onRestart }: GameBoardProps) 
               transition={{ duration: 0.4, ease: "easeOut" }}
             />
           </div>
-          <span className="text-xs text-muted-foreground font-body font-bold tabular-nums bg-muted/20 px-2 py-1 rounded-lg">
+          <span className="text-[11px] text-muted-foreground font-body font-bold tabular-nums bg-muted/15 px-2 py-0.5 rounded-md border border-border/10">
             {clickedBlocks.size}/30
           </span>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-5 gap-2.5">
+        <div className="grid grid-cols-5 gap-2">
           {Array.from({ length: 30 }, (_, i) => i + 1).map((num) => {
             const isClicked = clickedBlocks.has(num);
             const playerColor = currentPlayer === 1 ? "--crimson-p1" : "--plum-p2";
             return (
               <motion.button
                 key={num}
-                initial={{ scale: 0, opacity: 0, rotateY: 90 }}
-                animate={{ scale: 1, opacity: 1, rotateY: 0 }}
-                transition={{ delay: num * 0.02, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={!isClicked ? { scale: 1.08, y: -3 } : {}}
-                whileTap={!isClicked ? { scale: 0.92 } : {}}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: num * 0.018, duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={!isClicked ? { scale: 1.06, y: -2 } : {}}
+                whileTap={!isClicked ? { scale: 0.94 } : {}}
                 onClick={() => handleBlockClick(num)}
                 disabled={isClicked}
-                className={`aspect-square rounded-xl font-body text-sm font-bold transition-all duration-300 ${
+                className={`aspect-square rounded-xl font-body text-sm font-bold transition-all duration-200 ${
                   isClicked
-                    ? "cursor-not-allowed opacity-30"
-                    : "cursor-pointer hover:shadow-lg"
+                    ? "cursor-not-allowed opacity-25"
+                    : "cursor-pointer"
                 }`}
                 style={
                   isClicked
                     ? {
-                        background: "hsl(var(--muted) / 0.15)",
-                        border: "1px solid hsl(var(--border) / 0.08)",
+                        background: "hsl(var(--muted) / 0.12)",
+                        border: "1px solid hsl(var(--border) / 0.06)",
                       }
                     : {
                         background: "var(--gradient-block)",
-                        border: "1px solid hsl(var(--border) / 0.3)",
+                        border: "1px solid hsl(var(--border) / 0.25)",
                         color: `hsl(var(${playerColor}))`,
-                        boxShadow: "0 2px 8px hsl(var(--background) / 0.3)",
+                        boxShadow: "0 1px 4px hsl(var(--foreground) / 0.04)",
                       }
                 }
               >
                 {isClicked ? (
-                  <Lock className="h-3.5 w-3.5 mx-auto text-muted-foreground/25" />
+                  <Lock className="h-3 w-3 mx-auto text-muted-foreground/20" />
                 ) : (
                   num
                 )}
